@@ -38,6 +38,7 @@ export default function BookingWidget({place}) {
       phone: phone || '',
       place: place._id,
       price: numberOfNights * place.price,
+      image: place.photos && place.photos.length > 0 ? place.photos[0] : '', // send first image if available
     };
     // Validate required fields before sending
     if (!bookingData.checkIn || !bookingData.checkOut || !bookingData.name || !bookingData.phone) {

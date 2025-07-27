@@ -29,11 +29,22 @@ export default function BookingWidget({place}) {
       setRedirect('/login');
       return;
     }
-    const response = await axios.post('https://house-rent-bk.onrender.com/api/bookings', {
-      checkIn,checkOut,numberOfGuests,name,phone,
-      place:place._id,
-      price:numberOfNights * place.price,
-    }, { withCredentials: true });
+    // Use place details as fallback for required fields
+    const bookingData = {
+      checkIn: checkIn || place.checkIn || '',
+      checkOut: checkOut || place.checkOut || '',
+      numberOfGuests: numberOfGuests || 1,
+      name: name || user?.name || '',
+      phone: phone || '',
+      place: place._id,
+      price: numberOfNights * place.price,
+    };
+    // Validate required fields before sending
+    if (!bookingData.checkIn || !bookingData.checkOut || !bookingData.name || !bookingData.phone) {
+      alert('Please fill in all booking details.');
+      return;
+    }
+    const response = await axios.post('https://house-rent-bk.onrender.com/api/bookings', bookingData, { withCredentials: true });
     const bookingId = response.data._id;
     setRedirect(`/account/bookings/${bookingId}`);
   }

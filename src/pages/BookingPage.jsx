@@ -9,7 +9,8 @@ export default function BookingsPage() {
   const [bookings,setBookings] = useState([]);
   useEffect(() => {
     axios.get('https://house-rent-bk.onrender.com/api/bookings').then(response => {
-      setBookings(response.data);
+      const data = response.data;
+      setBookings(Array.isArray(data) ? data : []);
     });
   }, []);
   return (

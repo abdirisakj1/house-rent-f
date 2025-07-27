@@ -60,6 +60,8 @@ export default function PhotosUploader({addedPhotos,onChange}) {
                type="text" placeholder={'Add using a link ....jpg'}/>
         <button onClick={addPhotoByLink} className="bg-gray-200 px-4 rounded-2xl">Add&nbsp;photo</button>
       </div>
+      {/* Debug output for troubleshooting */}
+      <div className="text-xs text-gray-400 mb-2">addedPhotos: {JSON.stringify(addedPhotos)}</div>
       <div className="mt-2 grid gap-2 grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
         {Array.isArray(addedPhotos) && addedPhotos.length > 0 && addedPhotos.map(link => (
           <div className="h-32 flex relative" key={link}>

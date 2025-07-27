@@ -73,7 +73,7 @@ export default function PlacesFormPage() {
       setRedirect(true);
     } else {
       // new place
-      await axios.post('https://house-rent-bk.onrender.com/api/places', placeData);
+      await axios.post('https://house-rent-bk.onrender.com/api/places', placeData, { withCredentials: true });
       setRedirect(true);
     }
 

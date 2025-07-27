@@ -234,6 +234,8 @@ export default function AdminPlacesList() {
               <div className="flex w-32 h-32 bg-gray-300 grow shrink-0 rounded-xl overflow-hidden">
                 <PlaceImg place={place} />
               </div>
+              {/* Debug output for troubleshooting */}
+              <div className="text-xs text-gray-400">photos: {JSON.stringify(place.photos)}</div>
               <div className="grow">
                 <h2 className="text-xl font-semibold">{place.title}</h2>
                 <p className="text-gray-600 mt-1">{place.address}</p>

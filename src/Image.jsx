@@ -3,9 +3,9 @@ export default function Image({src, ...rest}) {
   if (src.startsWith('http://') || src.startsWith('https://')) {
     // Already a full URL, do nothing
   } else if (src.startsWith('/uploads/')) {
-    src = 'http://localhost:4000' + src;
+    src = 'https://house-rent-bk.onrender.com' + src;
   } else {
-    src = 'http://localhost:4000/uploads/' + src;
+    src = 'https://house-rent-bk.onrender.com/uploads/' + src;
   }
   return (
     <img {...rest} src={src} alt={''} />

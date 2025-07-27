@@ -25,11 +25,15 @@ export default function BookingWidget({place}) {
   }
 
   async function bookThisPlace() {
+    if (!user) {
+      setRedirect('/login');
+      return;
+    }
     const response = await axios.post('https://house-rent-bk.onrender.com/api/bookings', {
       checkIn,checkOut,numberOfGuests,name,phone,
       place:place._id,
       price:numberOfNights * place.price,
-    });
+    }, { withCredentials: true });
     const bookingId = response.data._id;
     setRedirect(`/account/bookings/${bookingId}`);
   }

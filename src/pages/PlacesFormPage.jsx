@@ -61,9 +61,16 @@ export default function PlacesFormPage() {
   async function savePlace(ev) {
     ev.preventDefault();
     const placeData = {
-      title, address, addedPhotos,
-      description, perks, extraInfo,
-      checkIn, checkOut, maxGuests, price,
+      title,
+      address,
+      addedPhotos: Array.isArray(addedPhotos) ? addedPhotos : [],
+      description,
+      perks,
+      extraInfo,
+      checkIn,
+      checkOut,
+      maxGuests,
+      price,
     };
     if (id) {
       // update

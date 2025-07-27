@@ -56,7 +56,7 @@ export default function PhotosUploader({addedPhotos,onChange}) {
         <button onClick={addPhotoByLink} className="bg-gray-200 px-4 rounded-2xl">Add&nbsp;photo</button>
       </div>
       <div className="mt-2 grid gap-2 grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-        {addedPhotos.length > 0 && addedPhotos.map(link => (
+        {Array.isArray(addedPhotos) && addedPhotos.length > 0 && addedPhotos.map(link => (
           <div className="h-32 flex relative" key={link}>
             <Image className="rounded-2xl w-full object-cover" src={link} alt=""/>
             <button onClick={ev => removePhoto(ev,link)} className="cursor-pointer absolute bottom-1 right-1 text-white bg-black bg-opacity-50 rounded-2xl py-2 px-3">

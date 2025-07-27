@@ -9,13 +9,18 @@ export default function PhotosUploader({addedPhotos,onChange}) {
     ev.preventDefault();
     setError('');
     try {
-      const {data:filename} = await axios.post('https://house-rent-bk.onrender.com/api/upload-by-link', {link: photoLink});
-      onChange(prev => {
-        return [...prev, filename];
-      });
-      setPhotoLink('');
+      const response = await axios.post('https://house-rent-bk.onrender.com/api/upload-by-link', {link: photoLink});
+      const filename = response.data;
+      if (typeof filename === 'string' && filename.startsWith('/uploads/')) {
+        onChange(prev => [...prev, filename]);
+        setPhotoLink('');
+      } else if (filename && filename.error) {
+        setError(filename.error);
+      } else {
+        setError('Failed to upload photo by link. Please check your backend or try again later.');
+      }
     } catch (err) {
-      setError('Failed to upload photo by link. Please check your backend or try again later.');
+      setError(err?.response?.data?.error || 'Failed to upload photo by link. Please check your backend or try again later.');
     }
   }
   function uploadPhoto(ev) {
